@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Guedr</string>
+    <string name="accesibilidad">Accesibilidad</string>
+    <string name="hola_mundo">Hola Jose!</string>
+</resources>
