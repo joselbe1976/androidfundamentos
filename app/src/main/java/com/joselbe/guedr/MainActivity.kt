@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState != null){
             //extraemos el valor
             Log.v(TAG, "savedInstanceState no es null")
-            Log.v(TAG, "El valor recuperado es ${savedInstanceState.getString("Key1"))}"  //extraigo el valor de una clave.
+            Log.v(TAG, "El valor recuperado es ${savedInstanceState.getString("Key1")}")  //extraigo el valor de una clave.
 
         }
         else{
