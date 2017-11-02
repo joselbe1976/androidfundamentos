@@ -1,30 +1,45 @@
 package com.joselbe.guedr
 
+import android.app.Activity
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
+import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 
 class ForecastActivity : AppCompatActivity()  {
+    //Es como un estatic de java
+    companion object {
+        val REQUEST_UNIT = 1
+    }
+    var max : TextView? = null
+    var min : TextView? = null
+
 
     //TAG name for Logs
     val TAG = ForecastActivity::class.java.canonicalName
 
     var forecast : Forecast? = null
         set(value){
+            //cuando se establece el valor de forcast, le asigno el value, lo fuerzo.
+            field = value
+
             //Capturamos referencia a los objetos de la vista
             val forecastImage =  findViewById<ImageView>(R.id.image_forcast)
             val decrip =  findViewById<TextView>(R.id.forcast_description)
-            val max =  findViewById<TextView>(R.id.txt_maxTemp)
-            val min =  findViewById<TextView>(R.id.txt_minTemp)
+            max =  findViewById<TextView>(R.id.txt_maxTemp)
+            min =  findViewById<TextView>(R.id.txt_minTemp)
             val hum =  findViewById<TextView>(R.id.txt_Humidity)
 
             //actualizamos los valores
             if (value != null) {
                 forecastImage.setImageResource(value.icon)
                 decrip.text = value.description
-                max.text = getString(R.string.max_temp_format, value.maxTemp) //get format in string
-                min.text = getString(R.string.min_temp_format, value.minTemp)
+                updateTemperature()
                 hum.text = getString(R.string.hum_format, value.humidy)
             }
         }
@@ -39,6 +54,82 @@ class ForecastActivity : AppCompatActivity()  {
 
     }
 
+    //Menu
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        super.onCreateOptionsMenu(menu)
+        menuInflater.inflate(R.menu.settings, menu) //inflamos y decimos que ebnganche en menu
+        return true
+
+    }
+
+    //que se hace al pulsar la opcoin de menu
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == R.id.menu_show_settings){
+            //Creo el intent
+            val intent = SettingsActivity.intent(this) //pedimos el intent
+            startActivityForResult(intent, REQUEST_UNIT)
+
+            return true //ok es mi opcion de menu
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == REQUEST_UNIT){
+            if (resultCode == Activity.RESULT_OK){
+                val unitSelected = data?.getIntExtra(SettingsActivity.EXTRA_UNIT, R.id.celsius_rb)
+
+                when (unitSelected) {
+                    R.id.celsius_rb -> {
+                        Log.v("TAG", "Han pulsado Grados celsius")
+                    }
+                    R.id.faranhait_rb -> {
+                        Log.v("TAG", "Han pulsado Grados Faranheit")
+                    }
+                }
+
+                // Guardamos la preferencia.
+                PreferenceManager.getDefaultSharedPreferences(this)
+                        .edit()
+                        .putBoolean(PREFERENCE_SHOW_CELSIUS, unitSelected == R.id.celsius_rb) //grabamos resttado comparacion
+                        .apply()
+
+                //actualizamos la temperatura
+                updateTemperature()
+
+            }
+            else if (resultCode == Activity.RESULT_CANCELED ){
+                Log.v("TAG","Han pulsado Cancel")
+            }
+        }
+    }
+
+    private fun updateTemperature() {
+        val units = temperatureUnits()
+        val unitsString = temperatureUnitsString(units)
+        val maxTempString = getString(R.string.max_temp_format, forecast?.maxTemp, unitsString)
+        val minTempString = getString(R.string.min_temp_format, forecast?.minTemp, unitsString)
+        max?.text = maxTempString
+        min?.text = minTempString
+
+    }
+
+
+    private fun temperatureUnitsString(units: Forecast.TempUnit) = when (units) {
+        Forecast.TempUnit.CELSIUS -> "ºC"
+        else -> "F"
+    }
+
+    private fun temperatureUnits() = if (PreferenceManager.getDefaultSharedPreferences(this)
+            .getBoolean(PREFERENCE_SHOW_CELSIUS, true)) {
+        Forecast.TempUnit.CELSIUS
+    }
+    else {
+        Forecast.TempUnit.FAHRENHEIT
+    }
 
 
 }

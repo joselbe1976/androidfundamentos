@@ -7,7 +7,9 @@
     <string name="sistema_burro">Sistema Burro</string>
     <string name="sistema_piedra">Sistema Piedra</string>
     <string name="imagen_del_tiempo_que_hace">Imagen del tiempo que hace</string>
-    <string name="max_temp_format">Temp. máxima: %.2fº</string>
-    <string name="min_temp_format">Temp. mínima: %.2fº</string>
+    <string name="max_temp_format">Temp. máxima: %.2f %s</string>
+    <string name="min_temp_format">Temp. mínima: %.2f %s</string>
     <string name="hum_format">Humedad: %.0f %%</string>
+    <string name="setting_text">Elige la sunidades de temperatura:</string>
+    <string name="ajustes">Ajustes</string>
 </resources>
