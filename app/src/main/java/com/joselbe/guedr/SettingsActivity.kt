@@ -14,13 +14,19 @@ class SettingsActivity : AppCompatActivity() {
     companion object {
         val EXTRA_UNIT = "EXTRA_UNITS"
 
-        //devuelve el intent.
-        fun intent(context : Context) : Intent {
-            return Intent(context, SettingsActivity::class.java)
+        //devuelve el intent. Pasamos el contexto y el tipo unidades por defecto
+        fun intent(context : Context, units: Int) : Intent {
+            val intent =  Intent(context, SettingsActivity::class.java)
+            intent.putExtra(EXTRA_UNIT, units) //metemos el tipo de unidades
+            return intent
         }
     }
 
-    var radioGroup : RadioGroup? = null
+    //var radioGroup : RadioGroup? = null
+
+    val radioGroup by lazy {
+        findViewById<RadioGroup>(R.id.units_rb)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,8 +35,11 @@ class SettingsActivity : AppCompatActivity() {
         //Es una closure que recibe una v o incluso quitarlo  "v ->"
         findViewById<View>(R.id.btnaceptar).setOnClickListener { accepSettings()}
         findViewById<View>(R.id.btncancelar).setOnClickListener { cancelSettings() }
-        radioGroup = findViewById(R.id.units_rb)
+        //radioGroup = findViewById(R.id.units_rb)
 
+        //seleciconamos el radio correcto que nos han pasado al crear el Intent
+        val radioSelected = intent.getIntExtra(EXTRA_UNIT, R.id.celsius_rb)
+        radioGroup?.check(radioSelected) //seleccionamos
     }
     private fun accepSettings(){
         val returnIntent = Intent()

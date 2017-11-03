@@ -5,11 +5,14 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.support.design.widget.Snackbar
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 
 class ForecastActivity : AppCompatActivity()  {
     //Es como un estatic de java
@@ -36,7 +39,7 @@ class ForecastActivity : AppCompatActivity()  {
             val hum =  findViewById<TextView>(R.id.txt_Humidity)
 
             //actualizamos los valores
-            if (value != null) {
+            value?.let {
                 forecastImage.setImageResource(value.icon)
                 decrip.text = value.description
                 updateTemperature()
@@ -66,7 +69,12 @@ class ForecastActivity : AppCompatActivity()  {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == R.id.menu_show_settings){
             //Creo el intent
-            val intent = SettingsActivity.intent(this) //pedimos el intent
+            val units =  if (temperatureUnits() == Forecast.TempUnit.CELSIUS)
+                            R.id.celsius_rb
+                         else
+                           R.id.faranhait_rb
+
+            val intent = SettingsActivity.intent(this, units) //pedimos el intent al estatico que lo crea y le pasamos el tipo de units
             startActivityForResult(intent, REQUEST_UNIT)
 
             return true //ok es mi opcion de menu
@@ -85,20 +93,41 @@ class ForecastActivity : AppCompatActivity()  {
                 when (unitSelected) {
                     R.id.celsius_rb -> {
                         Log.v("TAG", "Han pulsado Grados celsius")
+                        //Toast.makeText(this, "seleccionado Celsisus", Toast.LENGTH_LONG).show()
                     }
                     R.id.faranhait_rb -> {
                         Log.v("TAG", "Han pulsado Grados Faranheit")
+                        //Toast.makeText(this, "seleccionado Faranheit", Toast.LENGTH_LONG).show()
                     }
                 }
 
                 // Guardamos la preferencia.
+                val oldShowCelsius = temperatureUnits()
+
                 PreferenceManager.getDefaultSharedPreferences(this)
                         .edit()
                         .putBoolean(PREFERENCE_SHOW_CELSIUS, unitSelected == R.id.celsius_rb) //grabamos resttado comparacion
                         .apply()
 
+
                 //actualizamos la temperatura
                 updateTemperature()
+
+                Snackbar.make(findViewById<View>(android.R.id.content), "Han cambiado las preferencias", Snackbar.LENGTH_LONG)
+                        .setAction("Deshacer"){
+                            //esto es una closure
+                            PreferenceManager.getDefaultSharedPreferences(this)
+                                    .edit()
+                                    .putBoolean(PREFERENCE_SHOW_CELSIUS, oldShowCelsius == Forecast.TempUnit.CELSIUS)
+                                    .apply()
+
+                                    //actualizamos la temperatura
+                                    updateTemperature()
+                        }
+                        .show()
+
+
+
 
             }
             else if (resultCode == Activity.RESULT_CANCELED ){
@@ -110,8 +139,8 @@ class ForecastActivity : AppCompatActivity()  {
     private fun updateTemperature() {
         val units = temperatureUnits()
         val unitsString = temperatureUnitsString(units)
-        val maxTempString = getString(R.string.max_temp_format, forecast?.maxTemp, unitsString)
-        val minTempString = getString(R.string.min_temp_format, forecast?.minTemp, unitsString)
+        val maxTempString = getString(R.string.max_temp_format, forecast?.getMaxTemp(units), unitsString)
+        val minTempString = getString(R.string.min_temp_format, forecast?.getMinTemp(units), unitsString)
         max?.text = maxTempString
         min?.text = minTempString
 
@@ -130,6 +159,7 @@ class ForecastActivity : AppCompatActivity()  {
     else {
         Forecast.TempUnit.FAHRENHEIT
     }
+
 
 
 }
