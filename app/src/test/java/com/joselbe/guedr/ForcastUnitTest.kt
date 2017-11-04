@@ -1,5 +1,6 @@
 package com.joselbe.guedr
 
+import com.joselbe.guedr.models.Forecast
 import org.junit.Test
 import org.junit.Assert.*
 import org.junit.Before
@@ -11,7 +12,7 @@ class ForcastUnitTest {
     @Before
     fun setUp(){
         //here prepare our test
-        forecast = Forecast(25f,10f,35f,"Soleado con nubes", R.drawable.ico_01)
+        forecast = Forecast(25f, 10f, 35f, "Soleado con nubes", R.drawable.ico_01)
     }
 
     @Test
@@ -32,10 +33,10 @@ class ForcastUnitTest {
     }
     @Test(expected = IllegalArgumentException::class)
     fun humidityOverRabge_thowsArgumentsExceptcion(){
-        Forecast(25f,10f,100.01f,"Descroption", R.drawable.ico_01)
+        Forecast(25f, 10f, 100.01f, "Descroption", R.drawable.ico_01)
     }
     @Test(expected = IllegalArgumentException::class)
     fun humidityUnderRabge_thowsArgumentsExceptcion(){
-        Forecast(25f,10f,-1f,"Descroption", R.drawable.ico_01)
+        Forecast(25f, 10f, -1f, "Descroption", R.drawable.ico_01)
     }
 }

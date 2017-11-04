@@ -1,4 +1,4 @@
-package com.joselbe.guedr
+package com.joselbe.guedr.fragments
 
 import android.app.Activity
 import android.app.Fragment
@@ -10,6 +10,10 @@ import android.util.Log
 import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
+import com.joselbe.guedr.PREFERENCE_SHOW_CELSIUS
+import com.joselbe.guedr.R
+import com.joselbe.guedr.activity.SettingsActivity
+import com.joselbe.guedr.models.Forecast
 
 
 class ForecastFragment : Fragment() {

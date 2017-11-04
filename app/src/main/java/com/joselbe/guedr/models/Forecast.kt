@@ -1,4 +1,4 @@
-package com.joselbe.guedr
+package com.joselbe.guedr.models
 
 /*
     val = Contantes

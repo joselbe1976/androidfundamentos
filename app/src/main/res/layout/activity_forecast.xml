@@ -7,12 +7,12 @@
     android:layout_alignParentBottom="true"
     android:orientation="vertical"
     android:layout_margin="3dp"
-    tools:context="com.joselbe.guedr.ForecastActivity">
+    tools:context="com.joselbe.guedr.activity.ForecastActivity">
 
     <fragment
         android:id="@+id/forecast_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.joselbe.guedr.ForecastFragment"></fragment>
+        android:name="com.joselbe.guedr.fragments.ForecastFragment"></fragment>
 
 </RelativeLayout>

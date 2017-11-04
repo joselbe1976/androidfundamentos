@@ -1,7 +1,8 @@
-package com.joselbe.guedr
+package com.joselbe.guedr.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.joselbe.guedr.R
 
 class ForecastActivity : AppCompatActivity()  {
 
