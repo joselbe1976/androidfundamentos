@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentBottom="true"
+    android:orientation="vertical"
+    android:layout_margin="3dp"
+    >
+
+
+    <ImageView
+        android:id="@+id/image_forcast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="@dimen/default_margin"
+        android:contentDescription="@string/imagen_del_tiempo_que_hace"
+        app:srcCompat="@drawable/ico_02" />
+
+    <TextView
+        android:id="@+id/forcast_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/image_forcast"
+        android:layout_marginTop="@dimen/default_margin"
+        tools:text="Texto de la @string/offlineDescripcion" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/forcast_description"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/image_forcast"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_maxTemp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_margin_8"
+            tools:text="Temperatura maxima 25 grados"
+            />
+        <TextView
+            android:id="@+id/txt_minTemp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_margin_8"
+            tools:text="Temperatura minima 22 grados"
+            />
+
+        <TextView
+            android:id="@+id/txt_Humidity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_margin_8"
+            tools:text="Humedad 50%"
+            />
+    </LinearLayout>
+
+</RelativeLayout>
