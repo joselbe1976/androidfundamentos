@@ -1,4 +1,4 @@
-package com.joselbe.guedr
+package com.keepcoding.guedr
 
 import org.junit.Test
 
@@ -14,6 +14,4 @@ class ExampleUnitTest {
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
     }
-
-
 }

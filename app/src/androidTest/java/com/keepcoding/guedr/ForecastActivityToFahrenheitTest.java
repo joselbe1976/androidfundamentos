@@ -1,4 +1,4 @@
-package com.joselbe.guedr;
+package com.keepcoding.guedr;
 
 
 import android.support.test.espresso.ViewInteraction;
@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
-import com.joselbe.guedr.activity.ForecastActivity;
+import com.keepcoding.guedr.activity.ForecastActivity;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -33,13 +33,13 @@ import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class ForecastActivityToFaranheitTest {
+public class ForecastActivityToFahrenheitTest {
 
     @Rule
     public ActivityTestRule<ForecastActivity> mActivityTestRule = new ActivityTestRule<>(ForecastActivity.class);
 
     @Test
-    public void forecastActivityToFaranheitTest() {
+    public void forecastActivityToFahrenheitTest() {
         openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
 
         ViewInteraction appCompatTextView = onView(
@@ -55,7 +55,7 @@ public class ForecastActivityToFaranheitTest {
         ViewInteraction appCompatRadioButton = onView(
                 allOf(withId(R.id.celsius_rb), withText("Unidades celsius"),
                         childAtPosition(
-                                allOf(withId(R.id.units_rb),
+                                allOf(withId(R.id.units_rg),
                                         childAtPosition(
                                                 withClassName(is("android.support.constraint.ConstraintLayout")),
                                                 1)),
@@ -63,19 +63,8 @@ public class ForecastActivityToFaranheitTest {
                         isDisplayed()));
         appCompatRadioButton.perform(click());
 
-        ViewInteraction appCompatRadioButton2 = onView(
-                allOf(withId(R.id.celsius_rb), withText("Unidades celsius"),
-                        childAtPosition(
-                                allOf(withId(R.id.units_rb),
-                                        childAtPosition(
-                                                withClassName(is("android.support.constraint.ConstraintLayout")),
-                                                1)),
-                                0),
-                        isDisplayed()));
-        appCompatRadioButton2.perform(click());
-
         ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.btnaceptar), withText("Aceptar"),
+                allOf(withId(R.id.ok_btn), withText("OK"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
@@ -96,19 +85,19 @@ public class ForecastActivityToFaranheitTest {
                         isDisplayed()));
         appCompatTextView2.perform(click());
 
-        ViewInteraction appCompatRadioButton3 = onView(
-                allOf(withId(R.id.faranhait_rb), withText("Unidades Faranheit"),
+        ViewInteraction appCompatRadioButton2 = onView(
+                allOf(withId(R.id.farenheit_rb), withText("Unidades Fahrenheit"),
                         childAtPosition(
-                                allOf(withId(R.id.units_rb),
+                                allOf(withId(R.id.units_rg),
                                         childAtPosition(
                                                 withClassName(is("android.support.constraint.ConstraintLayout")),
                                                 1)),
                                 1),
                         isDisplayed()));
-        appCompatRadioButton3.perform(click());
+        appCompatRadioButton2.perform(click());
 
         ViewInteraction appCompatButton2 = onView(
-                allOf(withId(R.id.btnaceptar), withText("Aceptar"),
+                allOf(withId(R.id.ok_btn), withText("OK"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
@@ -118,7 +107,7 @@ public class ForecastActivityToFaranheitTest {
         appCompatButton2.perform(click());
 
         ViewInteraction textView = onView(
-                allOf(withId(R.id.txt_maxTemp), withText("Temp. máxima: 77.00 F"),
+                allOf(withId(R.id.max_temp), withText("Temp. máxima: 77.00 F"),
                         childAtPosition(
                                 childAtPosition(
                                         IsInstanceOf.<View>instanceOf(android.widget.RelativeLayout.class),
@@ -128,7 +117,7 @@ public class ForecastActivityToFaranheitTest {
         textView.check(matches(withText("Temp. máxima: 77.00 F")));
 
         ViewInteraction textView2 = onView(
-                allOf(withId(R.id.txt_minTemp), withText("Temp. mínima: 50.00 F"),
+                allOf(withId(R.id.min_temp), withText("Temp. mínima: 50.00 F"),
                         childAtPosition(
                                 childAtPosition(
                                         IsInstanceOf.<View>instanceOf(android.widget.RelativeLayout.class),

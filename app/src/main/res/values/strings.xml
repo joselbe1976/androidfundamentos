@@ -1,15 +1,19 @@
 <resources>
-    <string name="app_name">Guedr</string>
-    <string name="accesibilidad">Accesibilidad</string>
-    <string name="hola_mundo">Hola Jose!</string>
-    <string name="textview">Otro Texto</string>
-    <string name="offlineDescripcion">Imagen que representa el tiempo cuando no hay internet</string>
-    <string name="sistema_burro">Sistema Burro</string>
-    <string name="sistema_piedra">Sistema Piedra</string>
-    <string name="imagen_del_tiempo_que_hace">Imagen del tiempo que hace</string>
+    <string name="app_name">Güedr</string>
+    <string name="greeting">Hola keepcoders!</string>
+    <string name="offline_description">Imagen que representa el tiempo cuando no hay internet</string>
+    <string name="stone_button">Sistema piedra</string>
+    <string name="donkey_button">Sistema burro</string>
+    <string name="forecast_image_description">Imagen del tiempo que hace</string>
     <string name="max_temp_format">Temp. máxima: %.2f %s</string>
     <string name="min_temp_format">Temp. mínima: %.2f %s</string>
-    <string name="hum_format">Humedad: %.0f %%</string>
-    <string name="setting_text">Elige la sunidades de temperatura:</string>
-    <string name="ajustes">Ajustes</string>
+    <string name="humidity_format">Humedad: %.0f %%</string>
+    <string name="choose_units">Elige las unidades de temperatura:</string>
+    <string name="celsius_unit">Unidades celsius</string>
+    <string name="farenheit_units">Unidades Fahrenheit</string>
+    <string name="settings">Ajustes</string>
+    <string name="previous">Anterior</string>
+    <string name="next">Siguiente</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

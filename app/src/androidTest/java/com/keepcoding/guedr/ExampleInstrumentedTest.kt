@@ -1,4 +1,4 @@
-package com.joselbe.guedr
+package com.keepcoding.guedr
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("com.joselbe.guedr", appContext.packageName)
+        assertEquals("com.keepcoding.guedr", appContext.packageName)
     }
 }

@@ -1,72 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ViewSwitcher
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_alignParentBottom="true"
-    android:orientation="vertical"
-    android:layout_margin="3dp"
+    android:id="@+id/viewSwitcher"
     >
 
-
-    <ImageView
-        android:id="@+id/image_forcast"
-        android:layout_width="wrap_content"
+    <ProgressBar
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="@dimen/default_margin"
-        android:contentDescription="@string/imagen_del_tiempo_que_hace"
-        app:srcCompat="@drawable/ico_02" />
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/default_margin"
+        android:indeterminate="true" />
 
-    <TextView
-        android:id="@+id/forcast_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/image_forcast"
-        android:layout_marginTop="@dimen/default_margin"
-        tools:text="Texto de la @string/offlineDescripcion" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_above="@+id/forcast_description"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_toRightOf="@+id/image_forcast"
-        android:orientation="vertical">
+    <!--<include layout="@layout/content_forecast"></include> -->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/forecast_List"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/txt_maxTemp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_margin_8"
-            tools:text="Temperatura maxima 25 grados"
-            />
-        <TextView
-            android:id="@+id/txt_minTemp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_margin_8"
-            tools:text="Temperatura minima 22 grados"
-            />
 
-        <TextView
-            android:id="@+id/txt_Humidity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_margin_8"
-            tools:text="Humedad 50%"
-            />
-    </LinearLayout>
+    </android.support.v7.widget.RecyclerView>
 
-</RelativeLayout>
+</ViewSwitcher>
